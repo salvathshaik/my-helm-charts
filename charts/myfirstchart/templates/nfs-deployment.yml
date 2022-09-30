@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+    name: nfs-deployment
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: nfs-with-pvc-kubeserve
+    template:
+        metadata:
+            labels:
+                app: nfs-with-pvc-kubeserve
+        spec:
+            volumes:
+                - name: nfsvolume
+                  persistentVolumeClaim:
+                      claimName: nfs-persistentvolumeclaim
+            containers:
+                - image: nginx
+                  name: nginxapp
+                  volumeMounts:
+                      - name: nfsvolume
+                        mountPath: /usr/share/nginx/html
+                  
+

@@ -1,0 +1,14 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+    name: persistentvolume-hostpath
+spec:
+    hostPath:
+        path: /hostpathVolumeLogs
+    capacity:
+        storage: 3Gi
+    accessModes:
+        - ReadWriteOnce #ReadWriteMany #ReadOnlyMany
+    persistentVolumeReclaimPolicy: Retain #Delete #Recycle
+# this means that for hostpathvolumelogs we only given 
+# access to 3gb and also it only once can read or wite the data to it.
